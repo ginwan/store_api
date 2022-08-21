@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const router = require("express").Router();
 const userRoute = require("./routes/user");
 const authRoute = require("./routes/auth");
 const productRoute = require("./routes/product");
@@ -21,7 +22,14 @@ mongoose
 // to accept json file
 app.use(express.json());
 app.use(cors());
+
 // routes
+app.use(
+  "/",
+  router.get("", (req, res) => {
+    res.send("Welcome to perfume API");
+  })
+);
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/products", productRoute);
